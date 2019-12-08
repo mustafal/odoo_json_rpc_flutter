@@ -6,12 +6,7 @@ class AuthenticateRequest {
   var id = 0;
   var params = AuthenticateParams();
 
-  AuthenticateRequest({
-    this.jsonRpc,
-    this.method,
-    this.id,
-    this.params,
-  });
+  AuthenticateRequest();
 
   AuthenticateRequest.fromJsonMap(Map<String, dynamic> map)
       : jsonRpc = map['jsonrpc'] ?? '2.0',

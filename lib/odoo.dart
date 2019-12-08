@@ -31,14 +31,13 @@ class Odoo {
       }
       return Void();
     }
-    final request = AuthenticateRequest(
-      id: 1,
-      params: AuthenticateParams(
-        login: login,
-        password: password,
-        db: db,
-      ),
-    );
+    final params = AuthenticateParams()
+      ..login = login.trim()
+      ..password = password.trim()
+      ..db = db.trim();
+    final request = AuthenticateRequest()
+      ..id = 1
+      ..params = params;
     final response = await DioFactory.dio
         .post<Map<String, dynamic>>(
       'web/session/authenticate',

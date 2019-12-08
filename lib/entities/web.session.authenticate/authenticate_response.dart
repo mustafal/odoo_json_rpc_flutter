@@ -7,12 +7,7 @@ class AuthenticateResponse {
   var result = AuthenticateResult();
   var error = OdooError();
 
-  AuthenticateResponse({
-    this.jsonRpc,
-    this.id,
-    this.result,
-    this.error,
-  });
+  AuthenticateResponse();
 
   bool get isSuccessful => !isError;
 

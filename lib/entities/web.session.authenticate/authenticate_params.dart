@@ -3,11 +3,7 @@ class AuthenticateParams {
   var password = '';
   var db = '';
 
-  AuthenticateParams({
-    this.login,
-    this.password,
-    this.db,
-  });
+  AuthenticateParams();
 
   AuthenticateParams.fromJsonMap(Map<String, dynamic> map)
       : login = map['login'] ?? '',

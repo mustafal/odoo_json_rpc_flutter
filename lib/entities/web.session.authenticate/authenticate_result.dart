@@ -14,22 +14,7 @@ class AuthenticateResult {
   var partnerId = 0;
   var webBaseUrl = '';
 
-  AuthenticateResult({
-    this.sessionId,
-    this.uid,
-    this.isSystem,
-    this.isAdmin,
-    this.userContext,
-    this.db,
-    this.serverVersion,
-    this.serverVersionInfo,
-    this.name,
-    this.username,
-    this.partnerDisplayName,
-    this.companyId,
-    this.partnerId,
-    this.webBaseUrl,
-  });
+  AuthenticateResult();
 
   AuthenticateResult.fromJsonMap(Map<String, dynamic> map)
       : sessionId = map['session_id'] ?? '',
