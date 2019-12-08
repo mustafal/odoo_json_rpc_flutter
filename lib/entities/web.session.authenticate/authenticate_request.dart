@@ -19,7 +19,7 @@ class AuthenticateRequest {
     data['jsonrpc'] = jsonRpc;
     data['method'] = method;
     data['id'] = id;
-    data['params'] = params == null ? null : params.toJson();
+    data['params'] = params.toJson();
     return data;
   }
 
