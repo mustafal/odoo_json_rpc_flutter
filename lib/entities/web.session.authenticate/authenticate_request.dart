@@ -1,18 +1,23 @@
-import 'package:odoo_json_rpc_flutter/entities/web.session.authenticate/params.dart';
+import 'package:odoo_json_rpc_flutter/entities/web.session.authenticate/authenticate_params.dart';
 
 class AuthenticateRequest {
   var jsonRpc = '2.0';
   var method = 'call';
   var id = 0;
-  var params = Params();
+  var params = AuthenticateParams();
 
-  AuthenticateRequest();
+  AuthenticateRequest({
+    this.jsonRpc,
+    this.method,
+    this.id,
+    this.params,
+  });
 
-  AuthenticateRequest.dynamic(Map<String, dynamic> map)
+  AuthenticateRequest.fromJsonMap(Map<String, dynamic> map)
       : jsonRpc = map['jsonrpc'] ?? '2.0',
         method = map['method'] ?? 'call',
         id = map['id'] ?? 0,
-        params = Params.fromJsonMap(map['params'] ?? {});
+        params = AuthenticateParams.fromJsonMap(map['params'] ?? {});
 
   Map<String, dynamic> toJson() {
     final data = Map<String, dynamic>();

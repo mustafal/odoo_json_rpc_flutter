@@ -1,11 +1,15 @@
-class Params {
+class AuthenticateParams {
   var login = '';
   var password = '';
   var db = '';
 
-  Params();
+  AuthenticateParams({
+    this.login,
+    this.password,
+    this.db,
+  });
 
-  Params.fromJsonMap(Map<String, dynamic> map)
+  AuthenticateParams.fromJsonMap(Map<String, dynamic> map)
       : login = map['login'] ?? '',
         password = map['password'] ?? '',
         db = map['db'] ?? '';
@@ -21,7 +25,7 @@ class Params {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is Params &&
+      other is AuthenticateParams &&
           runtimeType == other.runtimeType &&
           login == other.login &&
           password == other.password &&
@@ -32,6 +36,6 @@ class Params {
 
   @override
   String toString() {
-    return 'Params{login: $login, password: $password, db: $db}';
+    return 'AuthenticateParams{login: $login, password: $password, db: $db}';
   }
 }

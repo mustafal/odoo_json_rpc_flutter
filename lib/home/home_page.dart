@@ -4,7 +4,7 @@ import 'package:odoo_json_rpc_flutter/config/config.dart';
 import 'package:odoo_json_rpc_flutter/config/dio_factory.dart';
 import 'package:odoo_json_rpc_flutter/entities/web.session.authenticate/authenticate_request.dart';
 import 'package:odoo_json_rpc_flutter/entities/web.session.authenticate/authenticate_response.dart';
-import 'package:odoo_json_rpc_flutter/entities/web.session.authenticate/params.dart';
+import 'package:odoo_json_rpc_flutter/entities/web.session.authenticate/authenticate_params.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -47,13 +47,12 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _authenticate() async {
-    final params = Params()
-      ..login = Config.Email
-      ..password = Config.Password
-      ..db = Config.Database;
-    final request = AuthenticateRequest()
-      ..id = 1
-      ..params = params;
+    final params = AuthenticateParams(
+      login: Config.Email,
+      password: Config.Password,
+      db: Config.Database,
+    );
+    final request = AuthenticateRequest(id: 1, params: params);
     final response = await DioFactory.dio
         .post<Map<String, dynamic>>('web/session/authenticate',
             data: request.toJson())

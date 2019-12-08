@@ -1,4 +1,4 @@
-class Result {
+class AuthenticateResult {
   var sessionId = '';
   var uid = 0;
   var isSystem = false;
@@ -14,9 +14,24 @@ class Result {
   var partnerId = 0;
   var webBaseUrl = '';
 
-  Result();
+  AuthenticateResult({
+    this.sessionId,
+    this.uid,
+    this.isSystem,
+    this.isAdmin,
+    this.userContext,
+    this.db,
+    this.serverVersion,
+    this.serverVersionInfo,
+    this.name,
+    this.username,
+    this.partnerDisplayName,
+    this.companyId,
+    this.partnerId,
+    this.webBaseUrl,
+  });
 
-  Result.fromJsonMap(Map<String, dynamic> map)
+  AuthenticateResult.fromJsonMap(Map<String, dynamic> map)
       : sessionId = map['session_id'] ?? '',
         uid = map['uid'] ?? 0,
         isSystem = map['is_system'] ?? false,
@@ -54,7 +69,7 @@ class Result {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is Result &&
+      other is AuthenticateResult &&
           runtimeType == other.runtimeType &&
           sessionId == other.sessionId &&
           uid == other.uid &&
@@ -90,6 +105,6 @@ class Result {
 
   @override
   String toString() {
-    return 'Result{sessionId: $sessionId, uid: $uid, isSystem: $isSystem, isAdmin: $isAdmin, userContext: $userContext, db: $db, serverVersion: $serverVersion, serverVersionInfo: $serverVersionInfo, name: $name, username: $username, partnerDisplayName: $partnerDisplayName, companyId: $companyId, partnerId: $partnerId, webBaseUrl: $webBaseUrl}';
+    return 'AuthenticateResult{sessionId: $sessionId, uid: $uid, isSystem: $isSystem, isAdmin: $isAdmin, userContext: $userContext, db: $db, serverVersion: $serverVersion, serverVersionInfo: $serverVersionInfo, name: $name, username: $username, partnerDisplayName: $partnerDisplayName, companyId: $companyId, partnerId: $partnerId, webBaseUrl: $webBaseUrl}';
   }
 }

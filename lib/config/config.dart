@@ -1,10 +1,10 @@
 class Config {
-  static const BaseUrl = 'http://704276-12-0-81f4e6.runbot23.odoo.com/';
+  static const BaseUrl = 'http://729647-12-0-62f211.runbot28.odoo.com/';
   static const Timeout = 60000;
 
   static const Email = 'admin';
   static const Password = 'admin';
-  static const Database = '704276-12-0-81f4e6-all';
+  static const Database = '729647-12-0-62f211-all';
 
   static const LogNetworkRequest = true;
   static const LogNetworkRequestHeader = true;

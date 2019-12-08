@@ -1,13 +1,18 @@
 import 'package:odoo_json_rpc_flutter/entities/error/odoo_error.dart';
-import 'package:odoo_json_rpc_flutter/entities/web.session.authenticate/result.dart';
+import 'package:odoo_json_rpc_flutter/entities/web.session.authenticate/authenticate_result.dart';
 
 class AuthenticateResponse {
   var jsonRpc = '2.0';
   var id = 0;
-  var result = Result();
+  var result = AuthenticateResult();
   var error = OdooError();
 
-  AuthenticateResponse();
+  AuthenticateResponse({
+    this.jsonRpc,
+    this.id,
+    this.result,
+    this.error,
+  });
 
   bool get isSuccessful => !isError;
 
@@ -20,7 +25,7 @@ class AuthenticateResponse {
   AuthenticateResponse.fromJsonMap(Map<String, dynamic> map)
       : jsonRpc = map['jsonrpc'] ?? '2.0',
         id = map['id'] ?? 0,
-        result = Result.fromJsonMap(map['result'] ?? {}),
+        result = AuthenticateResult.fromJsonMap(map['result'] ?? {}),
         error = OdooError.fromJsonMap(map['error'] ?? {});
 
   Map<String, dynamic> toJson() {
