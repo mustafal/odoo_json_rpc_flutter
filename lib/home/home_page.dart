@@ -50,6 +50,16 @@ class _HomePageState extends State<HomePage> {
   void _authenticate() async {
     final OnError onError = (final DioError error) {
       print(error.toString());
+      if (error.type != DioErrorType.RESPONSE &&
+          error.type != DioErrorType.CANCEL) {
+        setState(() {
+          this.response = 'Server unreachable';
+        });
+      } else {
+        setState(() {
+          this.response = error.message;
+        });
+      }
     };
 
     final OnResponse<AuthenticateResponse> onResponse =

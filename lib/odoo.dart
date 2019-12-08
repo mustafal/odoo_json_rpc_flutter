@@ -20,8 +20,8 @@ class Odoo {
     @required final OnResponse<AuthenticateResponse> onResponse,
   }) async {
     if (login == null || password == null || db == null) {
+      print('please provide non-null values for parameters');
       if (!kReleaseMode) {
-        print('please provide non-null values for parameters');
         print('login: $login, password: $password, db: $db');
       }
       return Void();
