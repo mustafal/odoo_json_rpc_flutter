@@ -1,10 +1,11 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:odoo_json_rpc_flutter/callback/odoo_callback.dart';
 import 'package:odoo_json_rpc_flutter/config/config.dart';
 import 'package:odoo_json_rpc_flutter/config/dio_factory.dart';
-import 'package:odoo_json_rpc_flutter/entities/web.session.authenticate/authenticate_request.dart';
 import 'package:odoo_json_rpc_flutter/entities/web.session.authenticate/authenticate_response.dart';
-import 'package:odoo_json_rpc_flutter/entities/web.session.authenticate/authenticate_params.dart';
+import 'package:odoo_json_rpc_flutter/odoo.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -47,38 +48,32 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _authenticate() async {
-    final params = AuthenticateParams(
+    final OnError onError = (final DioError error) {
+      print(error.toString());
+    };
+
+    final OnResponse<AuthenticateResponse> onResponse =
+        (final AuthenticateResponse response) {
+      if (!response.isSuccessful) {
+        print('${response.errorMessage}');
+        setState(() {
+          this.response = response.errorMessage;
+        });
+        return;
+      }
+      setState(() {
+        this.response = 'authenticated';
+      });
+      _searchRead();
+    };
+
+    await Odoo.authenticate(
       login: Config.Email,
       password: Config.Password,
       db: Config.Database,
+      onError: onError,
+      onResponse: onResponse,
     );
-    final request = AuthenticateRequest(id: 1, params: params);
-    final response = await DioFactory.dio
-        .post<Map<String, dynamic>>('web/session/authenticate',
-            data: request.toJson())
-        .catchError((final e) {
-      final message = e.toString();
-      print(message);
-    });
-    if (response == null) {
-      return;
-    }
-    if (response.statusCode != 200) {
-      print('response failed ${response.statusCode}:${response.statusMessage}');
-      return;
-    }
-    final responseData = AuthenticateResponse.fromJsonMap(response.data ?? {});
-    if (!responseData.isSuccessful) {
-      print('${responseData.errorMessage}');
-      setState(() {
-        this.response = responseData.errorMessage;
-      });
-      return;
-    }
-    setState(() {
-      this.response = 'authenticated';
-    });
-    _searchRead();
   }
 
   void _searchRead() async {
