@@ -19,19 +19,12 @@ class Odoo {
     @required final OnError onError,
     @required final OnResponse<AuthenticateResponse> onResponse,
   }) async {
-    if (login == null || password == null || db == null) {
-      print('please provide non-null values for parameters');
-      if (!kReleaseMode) {
-        print('login: $login, password: $password, db: $db');
-      }
-      return Void();
-    }
     final request = AuthenticateRequest(
       id: 1,
       params: AuthenticateParams(
-        login: login,
-        password: password,
-        db: db,
+        login: login ?? '',
+        password: password ?? '',
+        db: db ?? '',
       ),
     );
     final response = await DioFactory.dio
