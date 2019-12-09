@@ -38,8 +38,11 @@ class DioFactory {
       _deviceName = 'Generic Windows Device';
     }
 
-    final directory = await getApplicationDocumentsDirectory();
+    final directory = await getApplicationSupportDirectory();
     _cookiesPath = '${directory.path}/.cookies/';
+    if (!kReleaseMode) {
+      print('_cookiesPath is $_cookiesPath');
+    }
 
     return Void();
   }
